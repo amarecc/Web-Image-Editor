@@ -1,5 +1,9 @@
 # Backend
 backend/target/
+backend/.classpath
+backend/.project
+backend/.factorypath
+backend/.settings/
 
 # Frontend
 frontend/node/
