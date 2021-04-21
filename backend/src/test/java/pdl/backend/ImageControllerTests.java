@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,15 +51,30 @@ public class ImageControllerTests {
 			.andExpect(status().isNotFound());
 	}
 
-	/*@Test
+	@Test
 	@Order(3)
-	public void deleteImageShouldReturnSuccess() throws Exception {
-		mockMvc.perform(delete("/images/0"))
+	public void getImageShouldReturnSuccess() throws Exception {
+		mockMvc.perform(get("/images/1"))
 			.andExpect(status().isOk());
-	}*/
+	}
 
 	@Test
 	@Order(4)
+	public void deleteImageShouldReturnSuccess() throws Exception {
+		mockMvc.perform(delete("/images/1"))
+			.andExpect(status().isOk());
+	}
+
+	@Test
+	@Order(8)
+	public void deleteImageShouldReturnNotFound() throws Exception {
+		mockMvc.perform(delete("/images/9999"))
+			.andExpect(status().isNotFound());
+	}
+
+
+	@Test
+	@Order(5)
 	public void deleteImageShouldReturnBadRequest() throws Exception {
 		mockMvc.perform(delete("/images/logo.png"))
 			.andExpect(status().isBadRequest());
@@ -66,11 +83,27 @@ public class ImageControllerTests {
 
 
 	@Test
-	@Order(5)
+	@Order(6)
 	public void createImageShouldReturnUnsupportedMediaType() throws Exception {
 		MockMultipartFile someText = new MockMultipartFile("file", "", MediaType.TEXT_PLAIN_VALUE, "test".getBytes());
 
 		mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(someText).contentType(MediaType.TEXT_PLAIN))
 			.andExpect(status().isUnsupportedMediaType());
 	}
+
+	@Test
+	@Order(7)
+	public void createImageShouldReturnSuccess() throws Exception {
+		final ClassPathResource imgFile = new ClassPathResource("images" + File.separator + "test.jpg");
+
+		try {
+			MockMultipartFile myImg = new MockMultipartFile("file", imgFile.getFilename(), MediaType.IMAGE_JPEG_VALUE, imgFile.getInputStream());
+			
+			mockMvc.perform(MockMvcRequestBuilders.multipart("/images").file(myImg).contentType(MediaType.IMAGE_JPEG_VALUE))
+				.andExpect(status().isOk());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
