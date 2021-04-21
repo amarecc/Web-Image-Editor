@@ -1,0 +1,18 @@
+[
+  { "name": "Augmenter la luminiosité", "apiName": "addLumen", "params": [{ "name": "Valeur", "apiName": "gain", "type": "input" }] },
+  { "name": "Diminuer la luminiosité", "apiName": "addLumen", "params": [{ "name": "Valeur (< 0)", "apiName": "gain", "type": "input" }] },
+  { "name": "Egaliser l'histogramme", "apiName": "equaliseHist", "params": [
+    { "name": "Canal S ", "apiName": "channel", "type": "radio", "value": "S" },
+    { "name": "Canal V ", "apiName": "channel", "type": "radio", "value": "V" }
+  ] },
+  { "name": "Colorer l'image", "apiName": "color", "params": [{ "name": "Teinte", "apiName": "tint", "type": "input" }] },
+  { "name": "Appliquer un flou", "apiName": "blur", "params": [
+    { "name": "Filtre gaussien ", "apiName": "filter", "type": "radio", "value": "gaussian" },
+    { "name": "Filtre moyen ", "apiName": "filter", "type": "radio", "value": "average" },
+    { "name": "Niveau", "apiName": "lvl", "type": "input" }
+   ] 
+  },
+  { "name": "Appliquer un filtre de contour", "apiName": "outline", "params": [] },
+  { "name": "Convertir en noir et blanc", "apiName": "colorToGray", "params": []},
+  { "name": "Pixeliser l'image", "apiName" : "pixelate", "params": [{ "name": "Niveau", "apiName": "lvl", "type": "input" }]}
+]

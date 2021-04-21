@@ -1,0 +1,12 @@
+# Backend
+backend/target/
+
+# Frontend
+frontend/node/
+frontend/node_modules/
+frontend/.classpath
+frontend/.projet
+frontend/.settings
+
+# imgProcessing
+imgProcessing/target/
